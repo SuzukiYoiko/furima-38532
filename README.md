@@ -6,7 +6,7 @@
 | --------------------- | ------ | ------------------------- |
 | nickname              | string | null: false               |
 | email                 | string | null: false, unique: true |
-| encrypted_password              | string | null: false               |
+| encrypted_password    | string | null: false               |
 | first_name            | string | null: false               |
 | last_name             | string | null: false               |
 | first_kana            | string | null: false               |
@@ -17,7 +17,7 @@
 
 - has_many :items
 - has_many :records
-- has_many :buyers
+- has_one :buyer
 
 ## itemsテーブル
 
@@ -25,18 +25,16 @@
 | ------------- | ---------- | ------------------------------ |
 | product_name  | string     | null: false                    |
 | concept       | text       | null: false                    |
-| category      | string     | null: false                    |
-| condition     | string     | null: false                    |
+| category      | integer    | null: false                    |
+| condition     | integer    | null: false                    |
 | product_price | integer    | null: false                    |
 | charge_price  | integer    | null: false                    |
-| deadline      | date       | null: false                    |
-| area          | string     | null: false                    |
+| deadline      | integer    | null: false                    |
+| area          | integer    | null: false                    |
 | user          | references | null: false, foreign_key: true |
 
 ### Association
-
-- belongs_to :user
-- has_one :buyer
+- has_one :record
 
 ## recordsテーブル
 
@@ -44,27 +42,28 @@
 | ---------- | ---------- | ------------------------------ |
 | buy_record | string     | null: false                    |
 | user       | references | null: false, foreign_key: true |
-| buyer      | references | null: false, foreign_key: true |
+| item       | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- belongs_to :buyer
+- has_many :buyer
 - has_one :item
 
 ## buyersテーブル
 
 | Column           | Type       | Option                         |
 | ---------------- | ---------- | ------------------------------ |
-| post_code        | integer    | null: false                    |
-| prefecture       | string     | null: false                    |
+| post_code        | string     | null: false                    |
+| prefecture       | integer    | null: false                    |
 | city             | string     | null: false                    |
-| building_name    | string     | null: false                    |
+| building_name    | string     |                                |
 | address          | string     | null: false                    |
-| telephone_number | integer    | null: false                    |
+| telephone_number | string     | null: false                    |
 | user             | references | null: false, foreign_key: true |
+| record           | references | null: false, foreign_key: true |
 
 ### Association
 
-- has_many :records
-- belongs_to :user
+- belongs_to :records
+- has_one :user
