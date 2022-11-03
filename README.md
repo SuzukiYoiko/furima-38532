@@ -17,37 +17,36 @@
 
 - has_many :items
 - has_many :records
-- has_one :buyer
 
 ## itemsテーブル
 
-| Column        | Type       | Option                         |
-| ------------- | ---------- | ------------------------------ |
-| product_name  | string     | null: false                    |
-| concept       | text       | null: false                    |
-| category      | integer    | null: false                    |
-| condition     | integer    | null: false                    |
-| product_price | integer    | null: false                    |
-| charge_price  | integer    | null: false                    |
-| deadline      | integer    | null: false                    |
-| area          | integer    | null: false                    |
-| user          | references | null: false, foreign_key: true |
+| Column          | Type       | Option                         |
+| --------------- | ---------- | ------------------------------ |
+| product_nam     | string     | null: false                    |
+| concept         | text       | null: false                    |
+| category_id     | integer    | null: false                    |
+| condition_id    | integer    | null: false                    |
+| product_price   | integer    | null: false                    |
+| charge_price_id | integer    | null: false                    |
+| deadline_id     | integer    | null: false                    |
+| area_id         | integer    | null: false                    |
+| user            | references | null: false, foreign_key: true |
 
 ### Association
+- belongs_to :user
 - has_one :record
 
 ## recordsテーブル
 
 | Column     | Type       | Option                         |
 | ---------- | ---------- | ------------------------------ |
-| buy_record | string     | null: false                    |
 | user       | references | null: false, foreign_key: true |
 | item       | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- has_many :buyer
+- has_one :buyer
 - has_one :item
 
 ## buyersテーブル
@@ -55,15 +54,13 @@
 | Column           | Type       | Option                         |
 | ---------------- | ---------- | ------------------------------ |
 | post_code        | string     | null: false                    |
-| prefecture       | integer    | null: false                    |
+| area_id          | integer    | null: false                    |
 | city             | string     | null: false                    |
 | building_name    | string     |                                |
 | address          | string     | null: false                    |
 | telephone_number | string     | null: false                    |
-| user             | references | null: false, foreign_key: true |
 | record           | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :records
-- has_one :user
+- has_one :record
