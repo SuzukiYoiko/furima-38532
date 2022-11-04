@@ -22,7 +22,7 @@
 
 | Column          | Type       | Option                         |
 | --------------- | ---------- | ------------------------------ |
-| product_nam     | string     | null: false                    |
+| product_name    | string     | null: false                    |
 | concept         | text       | null: false                    |
 | category_id     | integer    | null: false                    |
 | condition_id    | integer    | null: false                    |
@@ -47,7 +47,7 @@
 
 - belongs_to :user
 - has_one :buyer
-- has_one :item
+- belongs_to :item
 
 ## buyersテーブル
 
@@ -63,4 +63,4 @@
 
 ### Association
 
-- has_one :record
+- belongs_to :record
