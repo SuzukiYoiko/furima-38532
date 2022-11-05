@@ -42,7 +42,7 @@ RSpec.describe User, type: :model do
       it "passwordが英数字混合でないと登録できない" do
         @user.password = '111111'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+        expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
       end
       it '重複したemailが存在する場合は登録できない' do
         @user.save
