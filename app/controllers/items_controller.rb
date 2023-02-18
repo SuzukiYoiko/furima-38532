@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new]
 
   def index
-    @item = Item.all
+    # @item = Item.all
   end
 
   def new
@@ -34,11 +34,11 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:product_name, :concept, :category_id, :condition_id, :product_price, :charge_price_id, :deadline_id, :area_id, :image).merge(user_id: current_user.id)
   end
 
-  def move_to_index
-    @item = Item.find(params[:id])
-    unless user_signed_in? && current_user.id == @item.user_id
-      redirect_to action: :index
-    end
+  # def move_to_index
+  #   @item = Item.find(params[:id])
+  #   unless user_signed_in? && current_user.id == @item.user_id
+  #     redirect_to action: :index
+  #   end
   end
 
 end
