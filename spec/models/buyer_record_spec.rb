@@ -21,7 +21,7 @@ RSpec.describe BuyerRecord, type: :model do
 
     context '商品購入情報を保存できないとき' do
       it 'tokenが空では保存できない' do
-        @record_buyer.token = ' '
+        @record_buyer.token = ''
         @record_buyer.valid?
         expect(@record_buyer.errors.full_messages).to include("Token can't be blank")
       end
@@ -75,6 +75,11 @@ RSpec.describe BuyerRecord, type: :model do
         @record_buyer.valid?
         expect(@record_buyer.errors.full_messages).to include('Phone number is invalid')
       end
+      it 'numberは9桁以下の数字では保存できない' do
+        @record_buyer.phone_number = '090123456'
+        @record_buyer.valid?
+        expect(@record_buyer.errors.full_messages).to include('Phone number is invalid')
+      end
       it 'phone_numberは半角英数混合では保存できない' do
         @record_buyer.phone_number = 'abc123456789'
         @record_buyer.valid?
@@ -86,12 +91,12 @@ RSpec.describe BuyerRecord, type: :model do
         expect(@record_buyer.errors.full_messages).to include('Phone number is invalid')
       end
       it 'user_id（購入者）が空だと保存できない' do
-        @record_buyer.user_id = ' '
+        @record_buyer.user_id = ''
         @record_buyer.valid?
         expect(@record_buyer.errors.full_messages).to include("User can't be blank")
       end
       it 'item_id（購入商品）が空だと保存できない' do
-        @record_buyer.item_id = ' '
+        @record_buyer.item_id = ''
         @record_buyer.valid?
         expect(@record_buyer.errors.full_messages).to include("Item can't be blank")
       end
